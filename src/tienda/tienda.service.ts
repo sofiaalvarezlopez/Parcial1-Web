@@ -14,7 +14,7 @@ export class TiendaService {
 
     async create(tienda: TiendaEntity): Promise<TiendaEntity> {
         if (tienda.telefono.length !== 10) {
-            throw new BusinessLogicException("El telefono de la tienda debe tener 10 caracteres", BusinessError.NOT_FOUND);
+            throw new BusinessLogicException("El telefono de la tienda debe tener 10 caracteres", BusinessError.PRECONDITION_FAILED);
         }
         return await this.tiendaRepository.save(tienda);
     }

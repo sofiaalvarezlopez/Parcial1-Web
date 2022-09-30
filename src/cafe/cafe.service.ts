@@ -14,7 +14,7 @@ export class CafeService {
 
     async create(cafe: CafeEntity): Promise<CafeEntity> {
         if (cafe.precio <= 0) {
-            throw new BusinessLogicException("El precio del cafe debe ser positivo", BusinessError.NOT_FOUND);
+            throw new BusinessLogicException("El precio del cafe debe ser positivo", BusinessError.PRECONDITION_FAILED);
         }
         return await this.cafeRepository.save(cafe);
     }

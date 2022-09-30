@@ -22,14 +22,14 @@ export class TiendaCafeService {
           throw new BusinessLogicException("El cafe con el ID dado no fue encontrado", BusinessError.NOT_FOUND);
 
         if (cafe.precio <= 0)
-          throw new BusinessLogicException("El precio del cafe debe ser positivo", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("El precio del cafe debe ser positivo", BusinessError.PRECONDITION_FAILED);
       
         const tienda: TiendaEntity = await this.tiendaRepository.findOne({where: {id: tiendaId}, relations: ["cafes"]})
         if (!tienda)
           throw new BusinessLogicException("La tienda con el id dado no fue encontrada", BusinessError.NOT_FOUND);
         
         if (tienda.telefono.length !== 10)
-          throw new BusinessLogicException("El telefono de la tienda debe tener 10 caracteres", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("El telefono de la tienda debe tener 10 caracteres", BusinessError.PRECONDITION_FAILED);
     
         tienda.cafes = [...tienda.cafes, cafe];
         return await this.tiendaRepository.save(tienda);
